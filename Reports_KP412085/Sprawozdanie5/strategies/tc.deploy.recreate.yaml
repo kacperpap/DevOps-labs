@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: temperature-converter
+spec:
+  replicas: 8
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: temperature-converter
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: temperature-converter
+        tier: backend
+    spec:
+      containers:
+      - name: temperature-converter
+        image: kacperpap/temperature_converter:0.1.0
+        ports:
+        - containerPort: 5000
